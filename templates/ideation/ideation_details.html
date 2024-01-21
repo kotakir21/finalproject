@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row p-5 mb-4 bg-light rounded-3">
+    <div class="col-md-8">
+        <div class="py-5">
+            <h1 class="display-6 fw-bold">{{ideation.ideation_title}}</h1>
+            <p>{{ideation.ideation_details}}</p>
+            {% if ideation.status == 'Pending' %}
+                <span class="badge bg-warning">Pending</span>
+            {% elif ideation.status == 'Active' %}
+                <span class="badge bg-success">Active</span>
+            {% elif ideation.status == 'Resolved' %}
+                <span class="badge bg-danger">Resolved</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="py-5">
+                    <h2 class="display-6">Quick Info</h2>
+                    <p>Here is some quick information about the ideation and the customer you are supporting.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>ideation Unique ID:</b> {{ideation.ideation_id}}</li>
+                        <li class="list-group-item"><b>Customer:</b> {{ideation.customer}}</li>
+                        <li class="list-group-item"><b>officer:</b> {{ideation.officer}}</li>
+                        <li class="list-group-item"><b>Created On:</b> {{ideation.created_on}}</li>
+                        <li class="list-group-item"><b>Severity:</b> {{ideation.severity}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--this is what i where to add the form fields. appname.fieldname-->
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">ideation Details</h2>
+        <dl class="row">
+            <dt class="col-sm-3">ideation Title:</dt>
+            <dd class="col-sm-9">{{ ideation.ideation_title }}</dd>
+
+            <dt class="col-sm-3">applicant_name:</dt>
+            <dd class="col-sm-9">{{ ideation.applicant_name }}</dd>
+
+            <dt class="col-sm-3">applicant_phone:</dt>
+            <dd class="col-sm-9">{{ ideation.applicant_phone }}</dd>
+
+            <dt class="col-sm-3">product_name:</dt>
+            <dd class="col-sm-9">{{ ideation.product_name }}</dd>
+
+            <dt class="col-sm-3">position_in_company:</dt>
+            <dd class="col-sm-9">{{ ideation.position_in_company}}</dd>
+
+            <dt class="col-sm-3">problem_description:</dt>
+            <dd class="col-sm-9">{{ ideation.problem_description }}</dd>
+
+            <dt class="col-sm-3">solution_description:</dt>
+            <dd class="col-sm-9">{{ ideation.solution_description}}</dd>
+
+            <dt class="col-sm-3">hub_requirements:</dt>
+            <dd class="col-sm-9">{{ ideation.hub_requirements }}</dd>
+
+            
+        </dl>
+    </div>
+</div>
+
+{% if ideation.is_resolved %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Resolution Steps</h5>
+        {{ideation.resolution_steps}}
+    </div>
+</div>
+{% else %}
+{% if request.user.is_officer %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Mark As Resolved
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resolution Steps</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'resolve-ideation' ideation.ideation_id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Here's how the issue was resolved</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="rs"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+
+{% endblock content %}

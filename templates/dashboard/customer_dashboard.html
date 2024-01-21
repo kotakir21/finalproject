@@ -1,0 +1,20 @@
+<!-- dashboard.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'dashboard/sidebar.html' %}
+        </div>
+        <div class="col-md-9" style="min-height: 500px;">
+            <div class="jumbotron p-4 p-md-5 mb-4 text-white rounded bg-dark">
+                <h1 class="display-5 fw-bold">Innovator Dashboard</h1>
+                <p class="col-md-8 fs-4">Welcome to your dashboard. Here, you can manage various aspects of your interactions with Innohub Connect.</p>
+            </div>
+        
+</div>
+{% endblock content %}
+
+
+
