@@ -52,10 +52,11 @@ def create_ticket(request):
         return render(request, 'ticket/create_ticket.html', context)
         
             
+
 # cx can see all active tickets
 def customer_active_tickets(request):
-    tickets = Ticket.objects.filter(customer=request.user, is_resolved=False).order_by('-created_on')
-    context = {'tickets':tickets}
+    context = {'tickets': Ticket.objects.filter(customer=request.user, is_resolved=False).order_by('-created_on')}
+    
     return render(request, 'ticket/customer_active_tickets.html', context)
 
 
@@ -93,6 +94,13 @@ def assign_ticket(request, ticket_id):
             var.is_assigned_to_officer = True
             var.status = 'Active'
             var.save()
+
+            subject_admin = f'New Ticket Submitted - #{var.ticket_id}'
+            message_admin = f'A new ticket has been assigned to you. Ticket ID: {var.ticket_id}'
+            email_from_admin = 'kbobroberts@gmail.com'  # Replace with your email
+            recipient_list_admin = ['kotakirobert7@gmail.com']  # Replace with the actual admin email
+            send_mail(subject_admin, message_admin, email_from_admin, recipient_list_admin)
+            
             messages.success(request, f'Ticket has been assigned to {var.officer}')
             return redirect('ticket-queue')
         else:

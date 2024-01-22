@@ -3,28 +3,34 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="container col-xl-8 px-4 py-5">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-8">
-            <h2 class="display-6 fw-bold lh-1 mb-3 text-center">Create New Ticket</h2>
-            <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
-
-                {% csrf_token %}
-
-                <div class="mb-3">
-                    <label for="ticketTitle" class="form-label">Ticket Title</label>
-                    {% render_field form.ticket_title class="form-control" id="ticketTitle" %}
-                </div>
-
-                <div class="mb-3">
-                    <label for="ticketDescription" class="form-label">Tell us more about the issue...</label>
-                    {% render_field form.ticket_description class="form-control" id="ticketDescription" %}
-                </div>
-
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
-
-            </form>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'dashboard/sidebar.html' %}
         </div>
-    </div>
-</div>
-{% endblock content %}
+        <div class="col-md-9">
+            <div class="container col-xl-12 col-xxl-10 px-4 py-5">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-10">
+                        <h2 class="display-6 fw-bold lh-1 mb-3 text-center">Send a New Inquiry</h2>
+                    <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="ticketTitle" class="form-label">Inquiry Title</label>
+                            {% render_field form.ticket_title class="form-control" id="ticketTitle" %}
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="ticketDescription" class="form-label">Tell us more about the issue...</label>
+                            {% render_field form.ticket_description class="form-control" id="ticketDescription" %}
+                        </div>
+        
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+        
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endblock content %}
+        

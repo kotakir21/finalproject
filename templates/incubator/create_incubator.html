@@ -126,6 +126,15 @@
                         </div>
         
                         <!-- Add other fields as needed -->
+                        <div class="mb-3">
+                            <label for="{{ form.funding_amount.id_for_label }}" class="form-label">Kindly indicate the amount of funding raised:</label>
+                            {% render_field form.funding_amount class="form-control" %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.hub_requirements.id_for_label }}" class="form-label">Kindly list below the requirements or support that you seek from the National ICT Innovation Hub</label>
+                            {% render_field form.hub_requirements class="form-control" %}
+                        </div>
         
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
                         </form>

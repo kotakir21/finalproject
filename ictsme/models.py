@@ -26,12 +26,12 @@ class Ictsme(models.Model):
     applicant_name = models.CharField(max_length=255)
     applicant_phone = models.CharField(max_length=15)
     product_name = models.CharField(max_length=255, blank=True, null=True)
-    year_of_incorporation = models.CharField(max_length=4)
+    year_of_incorporation = models.CharField(max_length=4, blank=True, null=True)
     have_ursb_registration_number = models.BooleanField(default=False)
-    ursb_registration_number = models.CharField(max_length=50)
+    ursb_registration_number = models.CharField(max_length=50, blank=True, null=True)
     have_ura_registration_number = models.BooleanField(default=False)    
-    ura_registration_number = models.CharField(max_length=50)
-    mentor_support = models.TextField()
-    hub_requirements = models.TextField()
+    ura_registration_number = models.CharField(max_length=50, blank=True, null=True)
+    mentor_support = models.TextField(blank=True)
+    hub_requirements = models.TextField(blank=True)
 
 

@@ -19,11 +19,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownTickets" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Tickets
+                            Inquiries
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownTickets">
-                            <li><a class="dropdown-item" href="{% if request.user.is_customer %}{% url 'customer-active-tickets' %}{% else %}{% url 'officer-active-tickets' %}{% endif %}">Active Tickets</a></li>
-                            <li><a class="dropdown-item" href="{% if request.user.is_customer %}{% url 'customer-resolved-tickets' %}{% else %}{% url 'officer-resolved-tickets' %}{% endif %}">Resolved Tickets</a></li>
+                            <li><a class="dropdown-item" href="{% if request.user.is_customer %}{% url 'customer-active-tickets' %}{% else %}{% url 'officer-active-tickets' %}{% endif %}">Active Inquiries</a></li>
+                            <li><a class="dropdown-item" href="{% if request.user.is_customer %}{% url 'customer-resolved-tickets' %}{% else %}{% url 'officer-resolved-tickets' %}{% endif %}">Resolved Inquiries</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
@@ -77,7 +77,7 @@
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="btn btn-warning btn-sm">Logout</a>
+                    <a href="{% url 'account_logout' %}" class="btn btn-warning btn-sm">Logout</a>
                 </li>
             </ul>
         </div>
